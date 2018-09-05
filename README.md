@@ -46,12 +46,12 @@ Please see the following table for some examples.
 |                                   |     | /path/to/fixtures/example.com/api/articles/1.mock |
 | http://example.com/api/articles | POST | /path/to/fixtures/example.com/api/articles.post.mock |
 |                                 |      | /path/to/fixtures/example.com/api/articles.mock |
-| http://example.com/api/comments?query=json | GET | /path/to/fixtures/example.com/api/comments.query-json.get.mock |
-|                                            |     | /path/to/fixtures/example.com/api/comments.query-json.mock |
+| http://example.com/api/comments?query=json | GET | /path/to/fixtures/example.com/api/comments.query=json.get.mock |
+|                                            |     | /path/to/fixtures/example.com/api/comments.query=json.mock |
 |                                            |     | /path/to/fixtures/example.com/api/comments.get.mock |
 |                                            |     | /path/to/fixtures/example.com/api/comments.mock |
-| http://example.com/api/comments?query=json&order=id | GET | /path/to/fixtures/example.com/api/comments.order-id-query-json.get.mock |
-|                                                     |     | /path/to/fixtures/example.com/api/comments.order-id-query-json.mock |
+| http://example.com/api/comments?query=json&order=id | GET | /path/to/fixtures/example.com/api/comments.order=id&query=json.get.mock |
+|                                                     |     | /path/to/fixtures/example.com/api/comments.order=id&query=json.mock |
 |                                                     |     | /path/to/fixtures/example.com/api/comments.get.mock |
 |                                                     |     | /path/to/fixtures/example.com/api/comments.mock |
 

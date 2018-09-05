@@ -45,8 +45,10 @@ class ResponseBuilderTest extends TestCase
             ['http://example.com/api/articles', 'GET', 'example.com/api/articles.mock'],
             // Nested
             ['http://example.com/api/articles/1', 'GET', 'example.com/api/articles/1.mock'],
-            // With query
-            ['http://example.com/api/comments?query=json', 'GET', 'example.com/api/comments.query-json.mock'],
+            // With simple query
+            ['http://example.com/api/comments?query=json', 'GET', 'example.com/api/comments.query=json.mock'],
+            // With complex query
+            ['http://example.com/api/comments?query=json&foo[]=bar&foo[]=baz', 'GET', 'example.com/api/comments.foo[]=bar&foo[]=baz&query=json.mock'],
             // With query fallback
             ['http://example.com/api/comments?foo=bar', 'GET', 'example.com/api/comments.mock'],
             // With method
@@ -54,7 +56,7 @@ class ResponseBuilderTest extends TestCase
             // With method fallback
             ['http://example.com/api/people', 'POST', 'example.com/api/people.mock'],
             // With query and method
-            ['http://example.com/api/tags?query=json', 'POST', 'example.com/api/tags.query-json.post.mock'],
+            ['http://example.com/api/tags?query=json', 'POST', 'example.com/api/tags.query=json.post.mock'],
             // With query and method fallback
             ['http://example.com/api/tags?foo=bar', 'GET', 'example.com/api/tags.mock'],
         ];
