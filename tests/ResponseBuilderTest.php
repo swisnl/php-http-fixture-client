@@ -4,9 +4,9 @@ namespace Swis\Http\Fixture\Tests;
 
 use Http\Discovery\MessageFactoryDiscovery;
 use PHPUnit\Framework\TestCase;
+use Swis\Http\Fixture\MockNotFoundException;
 use Swis\Http\Fixture\ResponseBuilder;
 use Swis\Http\Fixture\ResponseBuilderInterface;
-use Swis\Http\Fixture\MockNotFoundException;
 use function GuzzleHttp\Psr7\stream_for;
 
 class ResponseBuilderTest extends TestCase
