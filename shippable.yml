@@ -14,5 +14,8 @@ build:
     # Install
     - composer install
 
+    # Code style
+    - vendor/bin/php-cs-fixer fix -v --dry-run --using-cache=no
+
     # Tests
     - vendor/bin/phpunit --log-junit shippable/testresults/junit.xml --coverage-xml shippable/codecoverage
