@@ -225,22 +225,22 @@ class ResponseBuilder implements ResponseBuilderInterface
 
     /**
      * @param \Psr\Http\Message\RequestInterface $request
-     * @param string                             $separator
+     * @param string                             $replacement
      *
      * @return string
      */
-    protected function getQueryFromRequest(RequestInterface $request, $separator = '-'): string
+    protected function getQueryFromRequest(RequestInterface $request, $replacement = '-'): string
     {
         $query = urldecode($request->getUri()->getQuery());
-        $parts = array_map(
-            function (string $part) use ($separator) {
-                return str_replace('=', $separator, $part);
-            },
-            explode('&', $query)
-        );
+        $parts = explode('&', $query);
         sort($parts);
+        $query = implode('&', $parts);
 
-        return Stringy::create(implode($separator, $parts))->slugify($separator);
+        return (string)Stringy::create(str_replace(['\\', '/', '?', ':', '*', '"', '>', '<', '|'], $replacement, $query))
+            ->toAscii()
+            ->delimit($replacement)
+            ->removeLeft($replacement)
+            ->removeRight($replacement);
     }
 
     /**
