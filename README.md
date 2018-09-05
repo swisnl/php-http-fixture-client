@@ -5,6 +5,7 @@
 [![Software License](https://img.shields.io/packagist/l/swisnl/php-http-fixture-client.svg)](LICENSE) 
 [![Run Status](https://api.shippable.com/projects/5a7d7deb260fde0600abe59e/badge?branch=master)](https://app.shippable.com/github/swisnl/php-http-fixture-client)
 [![Coverage Badge](https://api.shippable.com/projects/5a7d7deb260fde0600abe59e/coverageBadge?branch=master)](https://app.shippable.com/github/swisnl/php-http-fixture-client)
+[![Made by SWIS](https://img.shields.io/badge/%F0%9F%9A%80-made%20by%20SWIS-%23D9021B.svg)](https://www.swis.nl)
 
 This is a fixture client for PHP-HTTP and is meant for testing purposes.
 It maps requests to static fixtures.
@@ -12,7 +13,7 @@ It maps requests to static fixtures.
 ## Install
 
 ``` bash
-composer require --dev swisnl/php-http-fixture-client
+$ composer require --dev swisnl/php-http-fixture-client
 ```
 
 ## Usage
@@ -77,11 +78,19 @@ The status code of a request is loaded from a fixture with the file extension _.
 This is a plain file containing only the [HTTP status code](https://httpstatuses.com/).
 If no _.status_ file is found, _200 OK_ will be used.
 
+## Change log
+
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+
 ## Testing
 
 ``` bash
-composer test
+$ composer test
 ```
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details.
 
 ## Security
 
@@ -89,4 +98,8 @@ If you discover any security related issues, please email security@swis.nl inste
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE) for more information.
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+## SWIS
+
+[SWIS](https://www.swis.nl) is a web agency from Leiden, the Netherlands. We love working with open source software. 
