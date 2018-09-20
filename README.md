@@ -2,7 +2,7 @@
 
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/swisnl/php-http-fixture-client.svg)](https://packagist.org/packages/swisnl/php-http-fixture-client)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/swisnl/php-http-fixture-client.svg)](https://packagist.org/packages/swisnl/php-http-fixture-client)
-[![Software License](https://img.shields.io/packagist/l/swisnl/php-http-fixture-client.svg)](https://github.com/swisnl/php-http-fixture-client/LICENSE) 
+[![Software License](https://img.shields.io/packagist/l/swisnl/php-http-fixture-client.svg)](https://github.com/swisnl/php-http-fixture-client/blob/master/LICENSE) 
 [![Run Status](https://api.shippable.com/projects/5a7d7deb260fde0600abe59e/badge?branch=master)](https://app.shippable.com/github/swisnl/php-http-fixture-client)
 [![Coverage Badge](https://api.shippable.com/projects/5a7d7deb260fde0600abe59e/coverageBadge?branch=master)](https://app.shippable.com/github/swisnl/php-http-fixture-client)
 [![Made by SWIS](https://img.shields.io/badge/%F0%9F%9A%80-made%20by%20SWIS-%23D9021B.svg)](https://www.swis.nl)
@@ -83,7 +83,7 @@ If no _.status_ file is found, _200 OK_ will be used.
 
 ## Change log
 
-Please see [CHANGELOG](https://github.com/swisnl/php-http-fixture-client/CHANGELOG.md) for more information on what has changed recently.
+Please see [CHANGELOG](https://github.com/swisnl/php-http-fixture-client/blob/master/CHANGELOG.md) for more information on what has changed recently.
 
 ## Testing
 
@@ -93,7 +93,7 @@ $ composer test
 
 ## Contributing
 
-Please see [CONTRIBUTING](https://github.com/swisnl/php-http-fixture-client/CONTRIBUTING.md) and [CODE_OF_CONDUCT](https://github.com/swisnl/php-http-fixture-client/CODE_OF_CONDUCT.md) for details.
+Please see [CONTRIBUTING](https://github.com/swisnl/php-http-fixture-client/blob/master/CONTRIBUTING.md) and [CODE_OF_CONDUCT](https://github.com/swisnl/php-http-fixture-client/blob/master/CODE_OF_CONDUCT.md) for details.
 
 ## Security
 
@@ -101,7 +101,7 @@ If you discover any security related issues, please email security@swis.nl inste
 
 ## License
 
-The MIT License (MIT). Please see [License File](https://github.com/swisnl/php-http-fixture-client/LICENSE.md) for more information.
+The MIT License (MIT). Please see [License File](https://github.com/swisnl/php-http-fixture-client/blob/master/LICENSE.md) for more information.
 
 ## SWIS
 
