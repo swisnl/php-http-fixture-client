@@ -1,0 +1,25 @@
+{
+  "name": "@swis/php-http-fixture-client",
+  "version": "0.1.0",
+  "description": "Fixture client for PHP-HTTP",
+  "scripts": {
+    "docs:dev": "copyfiles README.md docs && vuepress dev docs",
+    "docs:build": "copyfiles README.md docs && vuepress build docs",
+    "docs:deploy": "gh-pages -d docs/.vuepress/dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swisnl/php-http-fixture-client.git"
+  },
+  "author": "Jasper Zonneveld <jasper@swis.nl>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/swisnl/php-http-fixture-client/issues"
+  },
+  "homepage": "https://github.com/swisnl/php-http-fixture-client#readme",
+  "devDependencies": {
+    "copyfiles": "^2.1.0",
+    "gh-pages": "^2.0.0",
+    "vuepress": "^0.14.4"
+  }
+}
