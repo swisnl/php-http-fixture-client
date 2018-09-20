@@ -211,15 +211,17 @@
                     return fixtures;
                 }
 
+                let pathname = url.pathname.replace(/\/$/, '');
                 let searchParams = Array.from(url.searchParams.entries());
+
                 if (searchParams.length) {
                     const search = this.formatSearchParams(searchParams);
-                    fixtures.push(`${url.hostname}${url.pathname}.${search}.${this.method}.mock`);
-                    fixtures.push(`${url.hostname}${url.pathname}.${search}.mock`);
+                    fixtures.push(`${url.hostname}${pathname}.${search}.${this.method}.mock`);
+                    fixtures.push(`${url.hostname}${pathname}.${search}.mock`);
                 }
 
-                fixtures.push(`${url.hostname}${url.pathname}.${this.method}.mock`);
-                fixtures.push(`${url.hostname}${url.pathname}.mock`);
+                fixtures.push(`${url.hostname}${pathname}.${this.method}.mock`);
+                fixtures.push(`${url.hostname}${pathname}.mock`);
 
                 return fixtures;
             }
