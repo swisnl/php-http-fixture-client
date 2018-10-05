@@ -55,6 +55,11 @@ Please see the following table for some examples.
 |                                                     |     | /path/to/fixtures/example.com/api/comments.get.mock |
 |                                                     |     | /path/to/fixtures/example.com/api/comments.mock |
 
+### Strict mode
+The `ReponseBuilder` can be set to strict mode using `setStrictMode(true)`.
+When in strict mode, only the first possible fixture path will be used.
+This means that both the method and query params must be present in the fixture file name and it does not fall back to other fixture files.
+
 ### Helper
 <UrlHelper>Please see <a href="https://swisnl.github.io/php-http-fixture-client/#helper">https://swisnl.github.io/php-http-fixture-client/#helper</a> for the URL helper.</UrlHelper>
 
