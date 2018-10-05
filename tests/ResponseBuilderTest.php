@@ -65,6 +65,29 @@ class ResponseBuilderTest extends TestCase
     /**
      * @test
      */
+    public function it_can_be_set_to_strict_mode()
+    {
+        $builder = $this->getBuilder();
+
+        // Strict mode off
+        $this->assertFalse($builder->useStrictMode());
+
+        $messageFactory = MessageFactoryDiscovery::find();
+        $builder->build($messageFactory->createRequest('POST', 'http://example.com/api/articles?foo=bar'));
+
+        // Strict mode on
+        $builder->setStrictMode(true);
+        $this->assertTrue($builder->useStrictMode());
+
+        $this->expectException(MockNotFoundException::class);
+
+        $messageFactory = MessageFactoryDiscovery::find();
+        $builder->build($messageFactory->createRequest('POST', 'http://example.com/api/articles?foo=bar'));
+    }
+
+    /**
+     * @test
+     */
     public function it_throws_an_exception_when_it_cant_find_a_fixture()
     {
         $this->expectException(MockNotFoundException::class);
