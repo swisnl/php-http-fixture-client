@@ -41,6 +41,11 @@ class ResponseBuilder implements ResponseBuilderInterface
     private $responseFactory;
 
     /**
+     * @var bool
+     */
+    private $strictMode = false;
+
+    /**
      * @param string                             $fixturesPath
      * @param array                              $domainAliases
      * @param \Http\Message\ResponseFactory|null $responseFactory
@@ -50,6 +55,26 @@ class ResponseBuilder implements ResponseBuilderInterface
         $this->fixturesPath = $fixturesPath;
         $this->domainAliases = $domainAliases;
         $this->responseFactory = $responseFactory ?: MessageFactoryDiscovery::find();
+    }
+
+    /**
+     * @return bool
+     */
+    public function useStrictMode(): bool
+    {
+        return $this->strictMode;
+    }
+
+    /**
+     * @param bool $strictMode
+     *
+     * @return self
+     */
+    public function setStrictMode(bool $strictMode): self
+    {
+        $this->strictMode = $strictMode;
+
+        return $this;
     }
 
     /**
@@ -183,6 +208,10 @@ class ResponseBuilder implements ResponseBuilderInterface
 
         $possibleFiles[] = implode('.', [$basePathToFile, $method, $type]);
         $possibleFiles[] = implode('.', [$basePathToFile, $type]);
+
+        if ($this->useStrictMode()) {
+            $possibleFiles = array_slice($possibleFiles, 0, 1);
+        }
 
         return $possibleFiles;
     }
