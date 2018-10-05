@@ -15,6 +15,8 @@
             <option value="trace">TRACE</option>
             <option value="patch">PATCH</option>
         </select>
+        <h4>Strict mode</h4>
+        <label><input type="checkbox" v-model="strictMode"> Use strict mode</label>
         <h4>Possible fixtures (in order of specificity)</h4>
         <ol v-if="fixtures.length">
             <li v-for="fixture in fixtures">/path/to/fixtures/{{ fixture }}</li>
@@ -196,7 +198,8 @@
         data() {
             return {
                 url: '',
-                method: 'get'
+                method: 'get',
+                strictMode: false
             };
         },
 
@@ -222,6 +225,10 @@
 
                 fixtures.push(`${url.hostname}${pathname}.${this.method}.mock`);
                 fixtures.push(`${url.hostname}${pathname}.mock`);
+
+                if (this.strictMode) {
+                    fixtures = fixtures.slice(0, 1);
+                }
 
                 return fixtures;
             }
