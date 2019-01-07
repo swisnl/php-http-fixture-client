@@ -86,6 +86,12 @@ The status code of a request is loaded from a fixture with the file extension _.
 This is a plain file containing only the [HTTP status code](https://httpstatuses.com/).
 If no _.status_ file is found, _200 OK_ will be used.
 
+## Mocks (advanced)
+
+This client extends [php-http/mock-client](https://github.com/php-http/mock-client), which allows you to add custom responses and exceptions that ignore fixture files. Please see the [mock-client documentation](https://github.com/php-http/mock-client#documentation) for more information.
+
+N.B. A default response can not be set because this client uses that under the hood.
+
 ## Change log
 
 Please see [CHANGELOG](https://github.com/swisnl/php-http-fixture-client/blob/master/CHANGELOG.md) for more information on what has changed recently.
