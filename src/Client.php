@@ -25,17 +25,12 @@ class Client extends MockClient
     }
 
     /**
-     * @param \Psr\Http\Message\RequestInterface $request
-     *
-     * @throws \Http\Client\Exception
-     * @throws \Exception
-     *
-     * @return \Psr\Http\Message\ResponseInterface|mixed|null
+     * {@inheritdoc}
      */
-    public function sendRequest(RequestInterface $request)
+    public function doSendRequest(RequestInterface $request)
     {
         $this->setDefaultResponse($this->fixtureResponseBuilder->build($request));
 
-        return parent::sendRequest($request);
+        return parent::doSendRequest($request);
     }
 }

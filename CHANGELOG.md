@@ -4,6 +4,11 @@ All notable changes to `swisnl/php-http-fixture-client` will be documented in th
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## Unreleased
+
+### Added
+- Add support for HTTPlug 2.0 and [PSR-18](https://www.php-fig.org/psr/psr-18/)
+
 ## [2.1.0] - 2018-10-05
 
 ### Added
