@@ -3,8 +3,9 @@
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/swisnl/php-http-fixture-client.svg)](https://packagist.org/packages/swisnl/php-http-fixture-client)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/swisnl/php-http-fixture-client.svg)](https://packagist.org/packages/swisnl/php-http-fixture-client)
 [![Software License](https://img.shields.io/packagist/l/swisnl/php-http-fixture-client.svg)](https://github.com/swisnl/php-http-fixture-client/blob/master/LICENSE) 
-[![Run Status](https://api.shippable.com/projects/5a7d7deb260fde0600abe59e/badge?branch=master)](https://app.shippable.com/github/swisnl/php-http-fixture-client)
-[![Coverage Badge](https://api.shippable.com/projects/5a7d7deb260fde0600abe59e/coverageBadge?branch=master)](https://app.shippable.com/github/swisnl/php-http-fixture-client)
+[![Build Status](https://travis-ci.org/swisnl/php-http-fixture-client.svg?branch=master)](https://travis-ci.org/swisnl/php-http-fixture-client)
+[![Scrutinizer Coverage](https://img.shields.io/scrutinizer/coverage/g/swisnl/php-http-fixture-client.svg)](https://scrutinizer-ci.com/g/swisnl/php-http-fixture-client/?branch=master)
+[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/swisnl/php-http-fixture-client.svg)](https://scrutinizer-ci.com/g/swisnl/php-http-fixture-client/?branch=master)
 [![Made by SWIS](https://img.shields.io/badge/%F0%9F%9A%80-made%20by%20SWIS-%23D9021B.svg)](https://www.swis.nl)
 
 This is a fixture client for PHP-HTTP and is meant for testing purposes.
