@@ -36,7 +36,7 @@ class ResponseBuilder implements ResponseBuilderInterface
     private $domainAliases;
 
     /**
-     * @var \Http\Message\MessageFactory
+     * @var \Http\Message\ResponseFactory
      */
     private $responseFactory;
 
@@ -109,9 +109,8 @@ class ResponseBuilder implements ResponseBuilderInterface
 
             return (int)file_get_contents($file);
         } catch (MockNotFoundException $e) {
+            return 200;
         }
-
-        return 200;
     }
 
     /**
@@ -128,9 +127,8 @@ class ResponseBuilder implements ResponseBuilderInterface
 
             return json_decode(file_get_contents($file), true);
         } catch (MockNotFoundException $e) {
+            return [];
         }
-
-        return [];
     }
 
     /**
