@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## Unreleased
 
+- Nothing
+
+## [2.2.0] - 2019-03-06
+
 ### Added
 - Add support for HTTPlug 2.0 and [PSR-18](https://www.php-fig.org/psr/psr-18/)
 
