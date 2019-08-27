@@ -3,6 +3,7 @@ composer.phar
 composer.lock
 /vendor/
 /.php_cs.cache
+/.phpunit.result.cache
 /node_modules/
 /docs/.vuepress/dist/
 /docs/README.md

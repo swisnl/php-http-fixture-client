@@ -17,7 +17,7 @@ class ClientTest extends TestCase
     public function it_can_send_a_request()
     {
         $request = new Request('GET', new Uri('http://example.com'));
-        /** @var \PHPUnit_Framework_MockObject_MockObject|\Swis\Http\Fixture\ResponseBuilderInterface $responseBuilder */
+        /** @var \PHPUnit\Framework\MockObject\MockObject&\Swis\Http\Fixture\ResponseBuilderInterface $responseBuilder */
         $responseBuilder = $this->getMockBuilder(ResponseBuilderInterface::class)->getMock();
         $responseBuilder->expects($this->once())
             ->method('build')

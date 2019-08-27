@@ -31,7 +31,7 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.14",
         "php-http/guzzle6-adapter": "^2.0",
-        "phpunit/phpunit": "^6.0"
+        "phpunit/phpunit": "^7.0|^8.0"
     },
     "provide": {
         "php-http/async-client-implementation": "1.0",
