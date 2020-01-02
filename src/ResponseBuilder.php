@@ -107,7 +107,7 @@ class ResponseBuilder implements ResponseBuilderInterface
         try {
             $file = $this->getMockFilePathForRequest($request, self::TYPE_STATUS);
 
-            return (int)file_get_contents($file);
+            return (int) file_get_contents($file);
         } catch (MockNotFoundException $e) {
             return 200;
         }
@@ -168,10 +168,7 @@ class ResponseBuilder implements ResponseBuilderInterface
         }
 
         if (null === $file) {
-            throw new MockNotFoundException(
-                'No fixture file found. Check possiblePaths for files that can be used.',
-                $possiblePaths
-            );
+            throw new MockNotFoundException('No fixture file found. Check possiblePaths for files that can be used.', $possiblePaths);
         }
 
         if (realpath(\dirname($file)) !== \dirname($file)) {
@@ -263,7 +260,7 @@ class ResponseBuilder implements ResponseBuilderInterface
         sort($parts);
         $query = implode('&', $parts);
 
-        return (string)Stringy::create(str_replace(['\\', '/', '?', ':', '*', '"', '>', '<', '|'], $replacement, $query))
+        return (string) Stringy::create(str_replace(['\\', '/', '?', ':', '*', '"', '>', '<', '|'], $replacement, $query))
             ->toAscii()
             ->delimit($replacement)
             ->removeLeft($replacement)
