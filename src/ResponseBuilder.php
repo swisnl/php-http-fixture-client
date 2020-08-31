@@ -171,7 +171,7 @@ class ResponseBuilder implements ResponseBuilderInterface
             throw new MockNotFoundException('No fixture file found. Check possiblePaths for files that can be used.', $possiblePaths);
         }
 
-        if (realpath(\dirname($file)) !== \dirname($file)) {
+        if (strpos(realpath($file), realpath($this->getFixturesPath())) !== 0) {
             throw new \RuntimeException(sprintf('Path to file "%s" is out of bounds.', $file));
         }
 
