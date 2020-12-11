@@ -10,7 +10,7 @@ class MockNotFoundExceptionTest extends TestCase
     /**
      * @test
      */
-    public function it_can_get_possible_paths()
+    public function itCanGetPossiblePaths()
     {
         $paths = ['path1', 'path2'];
         $exception = new MockNotFoundException('message', $paths);

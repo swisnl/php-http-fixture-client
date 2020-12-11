@@ -19,7 +19,7 @@ class ResponseBuilderTest extends TestCase
      * @param string $method
      * @param string $expectedMock
      */
-    public function it_can_build_a_response(string $url, string $method, string $expectedMock)
+    public function itCanBuildAResponse(string $url, string $method, string $expectedMock)
     {
         $builder = $this->getBuilder();
 
@@ -65,7 +65,7 @@ class ResponseBuilderTest extends TestCase
     /**
      * @test
      */
-    public function it_can_be_set_to_strict_mode()
+    public function itCanBeSetToStrictMode()
     {
         $builder = $this->getBuilder();
 
@@ -88,7 +88,7 @@ class ResponseBuilderTest extends TestCase
     /**
      * @test
      */
-    public function it_throws_an_exception_when_it_cant_find_a_fixture()
+    public function itThrowsAnExceptionWhenItCantFindAFixture()
     {
         $this->expectException(MockNotFoundException::class);
 
@@ -99,7 +99,7 @@ class ResponseBuilderTest extends TestCase
     /**
      * @test
      */
-    public function it_throws_an_exception_when_path_is_out_of_bounds()
+    public function itThrowsAnExceptionWhenPathIsOutOfBounds()
     {
         $this->expectException(\RuntimeException::class);
 
@@ -110,7 +110,7 @@ class ResponseBuilderTest extends TestCase
     /**
      * @test
      */
-    public function it_can_build_a_response_using_domain_aliases()
+    public function itCanBuildAResponseUsingDomainAliases()
     {
         $messageFactory = MessageFactoryDiscovery::find();
 
@@ -129,7 +129,7 @@ class ResponseBuilderTest extends TestCase
     /**
      * @test
      */
-    public function it_can_build_a_response_with_custom_headers()
+    public function itCanBuildAResponseWithCustomHeaders()
     {
         $messageFactory = MessageFactoryDiscovery::find();
 
@@ -148,7 +148,7 @@ class ResponseBuilderTest extends TestCase
     /**
      * @test
      */
-    public function it_can_build_a_response_with_custom_status()
+    public function itCanBuildAResponseWithCustomStatus()
     {
         $messageFactory = MessageFactoryDiscovery::find();
 

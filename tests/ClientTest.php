@@ -14,7 +14,7 @@ class ClientTest extends TestCase
     /**
      * @test
      */
-    public function it_can_send_a_request()
+    public function itCanSendARequest()
     {
         $request = new Request('GET', new Uri('http://example.com'));
         /** @var \PHPUnit\Framework\MockObject\MockObject&\Swis\Http\Fixture\ResponseBuilderInterface $responseBuilder */
