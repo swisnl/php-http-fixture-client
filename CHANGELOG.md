@@ -6,8 +6,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## Unreleased
 
+### Added
+- PHP 8 support
+
 ### Removed
-- Dropped PHP 7.0 support
+- Dropped PHP <7.2 support
 
 ## [2.2.0] - 2019-03-06
 
