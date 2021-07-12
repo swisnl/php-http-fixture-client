@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## Unreleased
 
+- Nothing
+
+## [2.3.0] - 2021-07-12
+
 ### Added
 - PHP 8 support
 
