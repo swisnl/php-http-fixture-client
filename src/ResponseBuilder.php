@@ -13,17 +13,17 @@ class ResponseBuilder implements ResponseBuilderInterface
     /**
      * @var string
      */
-    const TYPE_BODY = 'mock';
+    private const TYPE_BODY = 'mock';
 
     /**
      * @var string
      */
-    const TYPE_HEADERS = 'headers';
+    private const TYPE_HEADERS = 'headers';
 
     /**
      * @var string
      */
-    const TYPE_STATUS = 'status';
+    private const TYPE_STATUS = 'status';
 
     /**
      * @var string
