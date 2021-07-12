@@ -2,7 +2,7 @@
 
 namespace Swis\Http\Fixture\Tests;
 
-use function GuzzleHttp\Psr7\stream_for;
+use GuzzleHttp\Psr7\Utils;
 use Http\Discovery\MessageFactoryDiscovery;
 use PHPUnit\Framework\TestCase;
 use Swis\Http\Fixture\MockNotFoundException;
@@ -29,7 +29,7 @@ class ResponseBuilderTest extends TestCase
             200,
             null,
             [],
-            stream_for(file_get_contents($this->getFixturesPath().'/'.$expectedMock))
+            Utils::streamFor(file_get_contents($this->getFixturesPath().'/'.$expectedMock))
         );
         $actualResponse = $builder->build(
             $messageFactory->createRequest($method, $url)
@@ -118,7 +118,7 @@ class ResponseBuilderTest extends TestCase
             200,
             '',
             [],
-            stream_for(file_get_contents($this->getFixturesPath().'/example.com/api/articles.mock'))
+            Utils::streamFor(file_get_contents($this->getFixturesPath().'/example.com/api/articles.mock'))
         );
 
         $actualResponse = $this->getBuilder()->build($messageFactory->createRequest('GET', 'http://foo.bar/api/articles'));
@@ -137,7 +137,7 @@ class ResponseBuilderTest extends TestCase
             200,
             '',
             ['X-Made-With' => 'PHPUnit'],
-            stream_for(file_get_contents($this->getFixturesPath().'/example.com/api/articles.mock'))
+            Utils::streamFor(file_get_contents($this->getFixturesPath().'/example.com/api/articles.mock'))
         );
 
         $actualResponse = $this->getBuilder()->build($messageFactory->createRequest('GET', 'http://example.com/api/articles'));
@@ -156,7 +156,7 @@ class ResponseBuilderTest extends TestCase
             500,
             '',
             [],
-            stream_for(file_get_contents($this->getFixturesPath().'/example.com/api/articles.mock'))
+            Utils::streamFor(file_get_contents($this->getFixturesPath().'/example.com/api/articles.mock'))
         );
         $actualResponse = $this->getBuilder()->build($messageFactory->createRequest('GET', 'http://example.com/api/articles'));
 
