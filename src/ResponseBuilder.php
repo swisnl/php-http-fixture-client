@@ -2,10 +2,12 @@
 
 namespace Swis\Http\Fixture;
 
-use Http\Discovery\MessageFactoryDiscovery;
-use Http\Message\ResponseFactory;
+use Http\Discovery\Psr17FactoryDiscovery;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Http\Message\StreamInterface;
 use Stringy\Stringy;
 
 class ResponseBuilder implements ResponseBuilderInterface
@@ -36,9 +38,14 @@ class ResponseBuilder implements ResponseBuilderInterface
     private $domainAliases;
 
     /**
-     * @var \Http\Message\ResponseFactory
+     * @var \Psr\Http\Message\ResponseFactoryInterface
      */
     private $responseFactory;
+
+    /**
+     * @var \Psr\Http\Message\StreamFactoryInterface
+     */
+    private $streamFactory;
 
     /**
      * @var bool
@@ -46,15 +53,21 @@ class ResponseBuilder implements ResponseBuilderInterface
     private $strictMode = false;
 
     /**
-     * @param string                             $fixturesPath
-     * @param array                              $domainAliases
-     * @param \Http\Message\ResponseFactory|null $responseFactory
+     * @param string                                          $fixturesPath
+     * @param array                                           $domainAliases
+     * @param \Psr\Http\Message\ResponseFactoryInterface|null $responseFactory
+     * @param \Psr\Http\Message\StreamFactoryInterface|null   $streamFactory
      */
-    public function __construct(string $fixturesPath, array $domainAliases = [], ResponseFactory $responseFactory = null)
-    {
+    public function __construct(
+        string $fixturesPath,
+        array $domainAliases = [],
+        ResponseFactoryInterface $responseFactory = null,
+        StreamFactoryInterface $streamFactory = null
+    ) {
         $this->fixturesPath = $fixturesPath;
         $this->domainAliases = $domainAliases;
-        $this->responseFactory = $responseFactory ?: MessageFactoryDiscovery::find();
+        $this->responseFactory = $responseFactory ?: Psr17FactoryDiscovery::findResponseFactory();
+        $this->streamFactory = $streamFactory ?: Psr17FactoryDiscovery::findStreamFactory();
     }
 
     /**
@@ -87,12 +100,15 @@ class ResponseBuilder implements ResponseBuilderInterface
      */
     public function build(RequestInterface $request): ResponseInterface
     {
-        return $this->responseFactory->createResponse(
-            $this->getMockStatusForRequest($request),
-            '',
-            $this->getMockHeadersForRequest($request),
-            $this->getMockBodyForRequest($request)
-        );
+        $response = $this->responseFactory
+            ->createResponse($this->getMockStatusForRequest($request))
+            ->withBody($this->getMockBodyForRequest($request));
+
+        foreach ($this->getMockHeadersForRequest($request) as $name => $value) {
+            $response = $response->withHeader($name, $value);
+        }
+
+        return $response;
     }
 
     /**
@@ -137,13 +153,13 @@ class ResponseBuilder implements ResponseBuilderInterface
      * @throws \RuntimeException
      * @throws \Swis\Http\Fixture\MockNotFoundException
      *
-     * @return string
+     * @return \Psr\Http\Message\StreamInterface
      */
-    protected function getMockBodyForRequest(RequestInterface $request): string
+    protected function getMockBodyForRequest(RequestInterface $request): StreamInterface
     {
         $file = $this->getMockFilePathForRequest($request, self::TYPE_BODY);
 
-        return file_get_contents($file);
+        return $this->streamFactory->createStreamFromFile($file);
     }
 
     /**

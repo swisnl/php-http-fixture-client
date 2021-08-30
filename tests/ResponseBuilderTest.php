@@ -3,8 +3,9 @@
 namespace Swis\Http\Fixture\Tests;
 
 use GuzzleHttp\Psr7\Utils;
-use Http\Discovery\MessageFactoryDiscovery;
+use Http\Discovery\Psr17FactoryDiscovery;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 use Swis\Http\Fixture\MockNotFoundException;
 use Swis\Http\Fixture\ResponseBuilder;
 use Swis\Http\Fixture\ResponseBuilderInterface;
@@ -19,22 +20,19 @@ class ResponseBuilderTest extends TestCase
      * @param string $method
      * @param string $expectedMock
      */
-    public function itCanBuildAResponse(string $url, string $method, string $expectedMock)
+    public function itCanBuildAResponse(string $url, string $method, string $expectedMock): void
     {
-        $builder = $this->getBuilder();
+        // arrange
+        $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
+        $responseFactory = Psr17FactoryDiscovery::findResponseFactory();
 
-        $messageFactory = MessageFactoryDiscovery::find();
+        $expectedResponse = $responseFactory->createResponse()
+            ->withBody(Utils::streamFor(file_get_contents($this->getFixturesPath().'/'.$expectedMock)));
 
-        $expectedResponse = $messageFactory->createResponse(
-            200,
-            null,
-            [],
-            Utils::streamFor(file_get_contents($this->getFixturesPath().'/'.$expectedMock))
-        );
-        $actualResponse = $builder->build(
-            $messageFactory->createRequest($method, $url)
-        );
+        // act
+        $actualResponse = $this->getBuilder()->build($requestFactory->createRequest($method, $url));
 
+        // assert
         $this->assertEquals($expectedResponse->getBody()->__toString(), $actualResponse->getBody()->__toString());
     }
 
@@ -42,124 +40,128 @@ class ResponseBuilderTest extends TestCase
     {
         return [
             // Simple
-            ['http://example.com/api/articles', 'GET', 'example.com/api/articles.mock'],
+            ['https://example.com/api/articles', 'GET', 'example.com/api/articles.mock'],
             // Nested
-            ['http://example.com/api/articles/1', 'GET', 'example.com/api/articles/1.mock'],
+            ['https://example.com/api/articles/1', 'GET', 'example.com/api/articles/1.mock'],
             // With simple query
-            ['http://example.com/api/comments?query=json', 'GET', 'example.com/api/comments.query=json.mock'],
+            ['https://example.com/api/comments?query=json', 'GET', 'example.com/api/comments.query=json.mock'],
             // With complex query
-            ['http://example.com/api/comments?query=json&foo[]=bar&foo[]=baz', 'GET', 'example.com/api/comments.foo[]=bar&foo[]=baz&query=json.mock'],
+            ['https://example.com/api/comments?query=json&foo[]=bar&foo[]=baz', 'GET', 'example.com/api/comments.foo[]=bar&foo[]=baz&query=json.mock'],
             // With query fallback
-            ['http://example.com/api/comments?foo=bar', 'GET', 'example.com/api/comments.mock'],
+            ['https://example.com/api/comments?foo=bar', 'GET', 'example.com/api/comments.mock'],
             // With method
-            ['http://example.com/api/people', 'GET', 'example.com/api/people.get.mock'],
+            ['https://example.com/api/people', 'GET', 'example.com/api/people.get.mock'],
             // With method fallback
-            ['http://example.com/api/people', 'POST', 'example.com/api/people.mock'],
+            ['https://example.com/api/people', 'POST', 'example.com/api/people.mock'],
             // With query and method
-            ['http://example.com/api/tags?query=json', 'POST', 'example.com/api/tags.query=json.post.mock'],
+            ['https://example.com/api/tags?query=json', 'POST', 'example.com/api/tags.query=json.post.mock'],
             // With query and method fallback
-            ['http://example.com/api/tags?foo=bar', 'GET', 'example.com/api/tags.mock'],
+            ['https://example.com/api/tags?foo=bar', 'GET', 'example.com/api/tags.mock'],
         ];
     }
 
     /**
      * @test
      */
-    public function itCanBeSetToStrictMode()
+    public function itCanBeSetToStrictMode(): void
     {
         $builder = $this->getBuilder();
+        $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
 
         // Strict mode off
         $this->assertFalse($builder->useStrictMode());
-
-        $messageFactory = MessageFactoryDiscovery::find();
-        $builder->build($messageFactory->createRequest('POST', 'http://example.com/api/articles?foo=bar'));
+        $builder->build($requestFactory->createRequest('POST', 'https://example.com/api/articles?foo=bar'));
 
         // Strict mode on
         $builder->setStrictMode(true);
         $this->assertTrue($builder->useStrictMode());
+        $this->expectException(MockNotFoundException::class);
+        $builder->build($requestFactory->createRequest('POST', 'https://example.com/api/articles?foo=bar'));
+    }
 
+    /**
+     * @test
+     */
+    public function itThrowsAnExceptionWhenItCantFindAFixture(): void
+    {
+        // arrange
+        $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
+
+        // assert
         $this->expectException(MockNotFoundException::class);
 
-        $messageFactory = MessageFactoryDiscovery::find();
-        $builder->build($messageFactory->createRequest('POST', 'http://example.com/api/articles?foo=bar'));
+        // act
+        $this->getBuilder()->build($requestFactory->createRequest('GET', 'https://example.com/api/lorem-ipsum'));
     }
 
     /**
      * @test
      */
-    public function itThrowsAnExceptionWhenItCantFindAFixture()
+    public function itThrowsAnExceptionWhenPathIsOutOfBounds(): void
     {
-        $this->expectException(MockNotFoundException::class);
+        // arrange
+        $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
 
-        $messageFactory = MessageFactoryDiscovery::find();
-        $this->getBuilder()->build($messageFactory->createRequest('GET', 'http://example.com/api/lorem-ipsum'));
+        // assert
+        $this->expectException(RuntimeException::class);
+
+        // act
+        $this->getBuilder()->build($requestFactory->createRequest('GET', 'https://example.com/../../out-of-bounds'));
     }
 
     /**
      * @test
      */
-    public function itThrowsAnExceptionWhenPathIsOutOfBounds()
+    public function itCanBuildAResponseUsingDomainAliases(): void
     {
-        $this->expectException(\RuntimeException::class);
+        // arrange
+        $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
+        $responseFactory = Psr17FactoryDiscovery::findResponseFactory();
 
-        $messageFactory = MessageFactoryDiscovery::find();
-        $this->getBuilder()->build($messageFactory->createRequest('GET', 'http://example.com/../../out-of-bounds'));
-    }
+        $expectedResponse = $responseFactory->createResponse()
+            ->withBody(Utils::streamFor(file_get_contents($this->getFixturesPath().'/example.com/api/articles.mock')));
 
-    /**
-     * @test
-     */
-    public function itCanBuildAResponseUsingDomainAliases()
-    {
-        $messageFactory = MessageFactoryDiscovery::find();
+        // act
+        $actualResponse = $this->getBuilder()->build($requestFactory->createRequest('GET', 'https://foo.bar/api/articles'));
 
-        $expectedResponse = $messageFactory->createResponse(
-            200,
-            '',
-            [],
-            Utils::streamFor(file_get_contents($this->getFixturesPath().'/example.com/api/articles.mock'))
-        );
-
-        $actualResponse = $this->getBuilder()->build($messageFactory->createRequest('GET', 'http://foo.bar/api/articles'));
-
+        // assert
         $this->assertEquals($expectedResponse->getBody()->__toString(), $actualResponse->getBody()->__toString());
     }
 
     /**
      * @test
      */
-    public function itCanBuildAResponseWithCustomHeaders()
+    public function itCanBuildAResponseWithCustomHeaders(): void
     {
-        $messageFactory = MessageFactoryDiscovery::find();
+        // arrange
+        $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
+        $responseFactory = Psr17FactoryDiscovery::findResponseFactory();
 
-        $expectedResponse = $messageFactory->createResponse(
-            200,
-            '',
-            ['X-Made-With' => 'PHPUnit'],
-            Utils::streamFor(file_get_contents($this->getFixturesPath().'/example.com/api/articles.mock'))
-        );
+        $expectedResponse = $responseFactory->createResponse()
+            ->withHeader('X-Made-With', 'PHPUnit');
 
-        $actualResponse = $this->getBuilder()->build($messageFactory->createRequest('GET', 'http://example.com/api/articles'));
+        // act
+        $actualResponse = $this->getBuilder()->build($requestFactory->createRequest('GET', 'https://example.com/api/articles'));
 
+        // assert
         $this->assertEquals($expectedResponse->getHeaders(), $actualResponse->getHeaders());
     }
 
     /**
      * @test
      */
-    public function itCanBuildAResponseWithCustomStatus()
+    public function itCanBuildAResponseWithCustomStatus(): void
     {
-        $messageFactory = MessageFactoryDiscovery::find();
+        // arrange
+        $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
+        $responseFactory = Psr17FactoryDiscovery::findResponseFactory();
 
-        $expectedResponse = $messageFactory->createResponse(
-            500,
-            '',
-            [],
-            Utils::streamFor(file_get_contents($this->getFixturesPath().'/example.com/api/articles.mock'))
-        );
-        $actualResponse = $this->getBuilder()->build($messageFactory->createRequest('GET', 'http://example.com/api/articles'));
+        $expectedResponse = $responseFactory->createResponse(500);
 
+        // act
+        $actualResponse = $this->getBuilder()->build($requestFactory->createRequest('GET', 'https://example.com/api/articles'));
+
+        // assert
         $this->assertEquals($expectedResponse->getStatusCode(), $actualResponse->getStatusCode());
     }
 
