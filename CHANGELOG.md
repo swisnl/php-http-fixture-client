@@ -8,6 +8,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Nothing
 
+## [2.3.2] - 2021-08-30
+
+### Fixed
+- Fixed issue introduced by internal refactor
+
 ## [2.3.1] - 2021-08-30
 
 ### Fixed
