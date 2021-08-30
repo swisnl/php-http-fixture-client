@@ -6,7 +6,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## Unreleased
 
-- Nothing
+### Fixed
+- Fixed compatibility with `php-http/mock-client: ^1.5`
 
 ## [2.3.0] - 2021-07-12
 

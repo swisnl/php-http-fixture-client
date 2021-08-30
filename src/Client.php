@@ -5,6 +5,7 @@ namespace Swis\Http\Fixture;
 use Http\Message\ResponseFactory;
 use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 class Client extends MockClient
 {
@@ -27,10 +28,10 @@ class Client extends MockClient
     /**
      * {@inheritdoc}
      */
-    public function doSendRequest(RequestInterface $request)
+    public function sendRequest(RequestInterface $request): ResponseInterface
     {
         $this->setDefaultResponse($this->fixtureResponseBuilder->build($request));
 
-        return parent::doSendRequest($request);
+        return parent::sendRequest($request);
     }
 }
