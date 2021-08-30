@@ -2,7 +2,7 @@
 
 namespace Swis\Http\Fixture;
 
-use Http\Discovery\MessageFactoryDiscovery;
+use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Message\ResponseFactory;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -54,7 +54,7 @@ class ResponseBuilder implements ResponseBuilderInterface
     {
         $this->fixturesPath = $fixturesPath;
         $this->domainAliases = $domainAliases;
-        $this->responseFactory = $responseFactory ?: MessageFactoryDiscovery::find();
+        $this->responseFactory = $responseFactory ?: Psr17FactoryDiscovery::findResponseFactory();
     }
 
     /**
