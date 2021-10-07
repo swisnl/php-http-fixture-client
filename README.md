@@ -3,6 +3,7 @@
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/swisnl/php-http-fixture-client.svg)](https://packagist.org/packages/swisnl/php-http-fixture-client)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/swisnl/php-http-fixture-client.svg)](https://packagist.org/packages/swisnl/php-http-fixture-client)
 [![Software License](https://img.shields.io/packagist/l/swisnl/php-http-fixture-client.svg)](https://github.com/swisnl/php-http-fixture-client/blob/master/LICENSE) 
+[![Buy us a tree](https://img.shields.io/badge/Treeware-%F0%9F%8C%B3-lightgreen.svg)](https://plant.treeware.earth/swisnl/php-http-fixture-client)
 [![Build Status](https://travis-ci.org/swisnl/php-http-fixture-client.svg?branch=master)](https://travis-ci.org/swisnl/php-http-fixture-client)
 [![Scrutinizer Coverage](https://img.shields.io/scrutinizer/coverage/g/swisnl/php-http-fixture-client.svg)](https://scrutinizer-ci.com/g/swisnl/php-http-fixture-client/?branch=master)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/swisnl/php-http-fixture-client.svg)](https://scrutinizer-ci.com/g/swisnl/php-http-fixture-client/?branch=master)
@@ -115,6 +116,8 @@ If you discover any security related issues, please email security@swis.nl inste
 
 The MIT License (MIT). Please see [License File](https://github.com/swisnl/php-http-fixture-client/blob/master/LICENSE.md) for more information.
 
-## SWIS
+This package is [Treeware](https://treeware.earth). If you use it in production, then we ask that you [**buy the world a tree**](https://plant.treeware.earth/swisnl/php-http-fixture-client) to thank us for our work. By contributing to the Treeware forest you’ll be creating employment for local families and restoring wildlife habitats.
+
+## SWIS :heart: Open Source
 
 [SWIS](https://www.swis.nl) is a web agency from Leiden, the Netherlands. We love working with open source software. 
