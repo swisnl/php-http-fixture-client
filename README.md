@@ -57,6 +57,11 @@ Please see the following table for some examples.
 |                                                     |     | /path/to/fixtures/example.com/api/comments.get.mock |
 |                                                     |     | /path/to/fixtures/example.com/api/comments.mock |
 
+### Domain aliases
+The `ReponseBuilder` can be instructed to use aliases for domains using `setDomainAliases([...])`.
+When configured, the provided aliases will be normalized when transforming requests to file paths.
+You should provide aliases in the form of `['alias' => 'abstract']`.
+
 ### Ignored query parameters
 The `ReponseBuilder` can be instructed to ignore certain query parameters using `setIgnoredQueryParameters([...])`.
 When configured, the provided parameters will be ignored when transforming requests to file paths.
