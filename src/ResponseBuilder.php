@@ -183,7 +183,7 @@ class ResponseBuilder implements ResponseBuilderInterface
         try {
             $file = $this->getMockFilePathForRequest($request, self::TYPE_HEADERS);
 
-            return json_decode(file_get_contents($file), true);
+            return json_decode(file_get_contents($file), true, 512, JSON_THROW_ON_ERROR);
         } catch (MockNotFoundException $e) {
             return [];
         }
