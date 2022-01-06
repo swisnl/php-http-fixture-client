@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## Unreleased
 
+- Nothing
+
+## [2.4.0] - 2022-01-06
+
 ### Added
 - Add an option to ignore certain query parameters. See readme for more info.
 
