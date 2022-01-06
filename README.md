@@ -2,7 +2,7 @@
 
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/swisnl/php-http-fixture-client.svg)](https://packagist.org/packages/swisnl/php-http-fixture-client)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/swisnl/php-http-fixture-client.svg)](https://packagist.org/packages/swisnl/php-http-fixture-client)
-[![Software License](https://img.shields.io/packagist/l/swisnl/php-http-fixture-client.svg)](https://github.com/swisnl/php-http-fixture-client/blob/master/LICENSE) 
+[![Software License](https://img.shields.io/packagist/l/swisnl/php-http-fixture-client.svg)](https://github.com/swisnl/php-http-fixture-client/blob/master/LICENSE)
 [![Buy us a tree](https://img.shields.io/badge/Treeware-%F0%9F%8C%B3-lightgreen.svg)](https://plant.treeware.earth/swisnl/php-http-fixture-client)
 [![Build Status](https://travis-ci.org/swisnl/php-http-fixture-client.svg?branch=master)](https://travis-ci.org/swisnl/php-http-fixture-client)
 [![Scrutinizer Coverage](https://img.shields.io/scrutinizer/coverage/g/swisnl/php-http-fixture-client.svg)](https://scrutinizer-ci.com/g/swisnl/php-http-fixture-client/?branch=master)
@@ -57,6 +57,13 @@ Please see the following table for some examples.
 |                                                     |     | /path/to/fixtures/example.com/api/comments.get.mock |
 |                                                     |     | /path/to/fixtures/example.com/api/comments.mock |
 
+### Ignored query parameters
+The `ReponseBuilder` can be instructed to ignore certain query parameters using `setIgnoredQueryParameters([...])`.
+When configured, the provided parameters will be ignored when transforming requests to file paths.
+You should only provide the parameter name, not the value.
+This allows you to ignore 'dynamic' parameters that change in each test execution.
+Parameters are matched strictly, so 'foo' will match 'foo=bar', but not 'foo[]=bar'.
+
 ### Strict mode
 The `ReponseBuilder` can be set to strict mode using `setStrictMode(true)`.
 When in strict mode, only the first possible fixture path will be used.
@@ -68,7 +75,7 @@ This means that both the method and query params must be present in the fixture 
 ### Body
 
 The body of a request is loaded directly from a fixture with the file extension _.mock_.
-The contents of this file can be anything that is a valid HTTP response, e.g. HTML, JSON or even images. 
+The contents of this file can be anything that is a valid HTTP response, e.g. HTML, JSON or even images.
 If a fixture can not be found, a `MockNotFoundException` will be thrown.
 This exception has a convenience method `getPossiblePaths()` which lists all file paths that were checked, in order of specificity.
 
@@ -120,4 +127,4 @@ This package is [Treeware](https://treeware.earth). If you use it in production,
 
 ## SWIS :heart: Open Source
 
-[SWIS](https://www.swis.nl) is a web agency from Leiden, the Netherlands. We love working with open source software. 
+[SWIS](https://www.swis.nl) is a web agency from Leiden, the Netherlands. We love working with open source software.

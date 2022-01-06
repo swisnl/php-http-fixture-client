@@ -6,6 +6,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## Unreleased
 
+### Added
+- Add an option to ignore certain query parameters. See readme for more info.
+
 ### Changed
 - The `ResponseBuilder` now requires PSR-17 factories instead of a PHP-HTTP factory, to align it with the `Client`. This is only a breaking change in the rare case where you provide your own factory to the `ResponseBuilder`.
 

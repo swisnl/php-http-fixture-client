@@ -53,6 +53,11 @@ class ResponseBuilder implements ResponseBuilderInterface
     private $strictMode = false;
 
     /**
+     * @var array
+     */
+    private $ignoredQueryParameters = [];
+
+    /**
      * @param string                                          $fixturesPath
      * @param array                                           $domainAliases
      * @param \Psr\Http\Message\ResponseFactoryInterface|null $responseFactory
@@ -86,6 +91,26 @@ class ResponseBuilder implements ResponseBuilderInterface
     public function setStrictMode(bool $strictMode): self
     {
         $this->strictMode = $strictMode;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getIgnoredQueryParameters(): array
+    {
+        return $this->ignoredQueryParameters;
+    }
+
+    /**
+     * @param array $ignoredQueryParameters
+     *
+     * @return self
+     */
+    public function setIgnoredQueryParameters(array $ignoredQueryParameters): self
+    {
+        $this->ignoredQueryParameters = $ignoredQueryParameters;
 
         return $this;
     }
@@ -272,7 +297,12 @@ class ResponseBuilder implements ResponseBuilderInterface
     protected function getQueryFromRequest(RequestInterface $request, string $replacement = '-'): string
     {
         $query = urldecode($request->getUri()->getQuery());
-        $parts = explode('&', $query);
+        $parts = array_filter(
+            explode('&', $query),
+            function (string $part) {
+                return !$this->isQueryPartIgnored($part);
+            }
+        );
         sort($parts);
         $query = implode('&', $parts);
 
@@ -281,6 +311,22 @@ class ResponseBuilder implements ResponseBuilderInterface
             ->delimit($replacement)
             ->removeLeft($replacement)
             ->removeRight($replacement);
+    }
+
+    /**
+     * @param string $part
+     *
+     * @return bool
+     */
+    protected function isQueryPartIgnored(string $part): bool
+    {
+        foreach ($this->getIgnoredQueryParameters() as $parameter) {
+            if ($part === $parameter || strncmp($part, $parameter.'=', strlen($parameter) + 1) === 0) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

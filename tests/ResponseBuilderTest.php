@@ -131,6 +131,26 @@ class ResponseBuilderTest extends TestCase
     /**
      * @test
      */
+    public function itCanBuildAResponseWithIgnoredParameters(): void
+    {
+        // arrange
+        $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
+        $responseFactory = Psr17FactoryDiscovery::findResponseFactory();
+        $builder = $this->getBuilder()->setIgnoredQueryParameters(['ignore-me', 'ignore-me-too']);
+
+        $expectedResponse = $responseFactory->createResponse()
+            ->withBody(Utils::streamFor(file_get_contents($this->getFixturesPath().'/example.com/api/articles.mock')));
+
+        // act
+        $actualResponse = $builder->build($requestFactory->createRequest('GET', 'https://example.com/api/articles?ignore-me=true&ignore-me-too'));
+
+        // assert
+        $this->assertEquals($expectedResponse->getBody()->__toString(), $actualResponse->getBody()->__toString());
+    }
+
+    /**
+     * @test
+     */
     public function itCanBuildAResponseWithCustomHeaders(): void
     {
         // arrange
