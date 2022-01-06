@@ -253,7 +253,7 @@ class ResponseBuilder implements ResponseBuilderInterface
      *
      * @return string
      */
-    protected function getQueryFromRequest(RequestInterface $request, $replacement = '-'): string
+    protected function getQueryFromRequest(RequestInterface $request, string $replacement = '-'): string
     {
         $query = urldecode($request->getUri()->getQuery());
         $parts = explode('&', $query);
