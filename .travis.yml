@@ -19,9 +19,9 @@ before_script:
 
 script:
   - vendor/bin/php-cs-fixer fix -v --dry-run --using-cache=no
-  - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+  - XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
 
 after_script:
   - |
-    wget https://scrutinizer-ci.com/ocular.phar
-    php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+    composer global require --no-interaction --prefer-dist scrutinizer/ocular
+    ~/.config/composer/vendor/bin/ocular code-coverage:upload --format=php-clover coverage.clover
