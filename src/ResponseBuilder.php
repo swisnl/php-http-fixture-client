@@ -8,7 +8,7 @@ use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
-use Stringy\Stringy;
+use Symfony\Component\String\UnicodeString;
 
 class ResponseBuilder implements ResponseBuilderInterface
 {
@@ -324,11 +324,12 @@ class ResponseBuilder implements ResponseBuilderInterface
         sort($parts);
         $query = implode('&', $parts);
 
-        return (string) Stringy::create(str_replace(['\\', '/', '?', ':', '*', '"', '>', '<', '|'], $replacement, $query))
-            ->toAscii()
-            ->delimit($replacement)
-            ->removeLeft($replacement)
-            ->removeRight($replacement);
+        return (new UnicodeString(str_replace(['\\', '/', '?', ':', '*', '"', '>', '<', '|'], $replacement, $query)))
+            ->folded()
+            ->ascii()
+            ->replaceMatches('/[-_\s]+/', $replacement)
+            ->trim($replacement)
+            ->toString();
     }
 
     /**

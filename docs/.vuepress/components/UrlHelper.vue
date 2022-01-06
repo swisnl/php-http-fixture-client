@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p>Use this helper to generate the possible fixtures for your own URL.</p>
+        <p>Use this helper to generate the possible fixtures for your own URL. Please note this is a simple JavaScript port and it will not be 100% accurate for special or accented characters.</p>
         <h4><label for="url">URL</label></h4>
         <input class="input" type="text" id="url" placeholder="http://example.com/api/comments?query=json&order=id" v-model="url"/>
         <h4><label for="method">Method</label></h4>
@@ -75,7 +75,7 @@
                    'ŏ', 'ο', 'ὀ', 'ὁ', 'ὂ', 'ὃ', 'ὄ', 'ὅ', 'ὸ', 'ό',
                    'о', 'و', 'θ', 'ို', 'ǒ', 'ǿ', 'º', 'ო', 'ओ', 'ｏ',
                    'ö'],
-        'p'     : ['п', 'π', 'ပ', 'პ', 'پ', 'ｐ'],
+        'p'     : ['п', 'π', 'ပ', 'პ', 'پ', 'ｐ', 'ƥ'],
         'q'     : ['ყ', 'ｑ'],
         'r'     : ['ŕ', 'ř', 'ŗ', 'р', 'ρ', 'ر', 'რ', 'ｒ'],
         's'     : ['ś', 'š', 'ş', 'с', 'σ', 'ș', 'ς', 'س', 'ص', 'စ',
@@ -253,27 +253,20 @@
                     .map(param => {
                         return param.replace(/[\\/?:*"><|]/g, REPLACEMENT);
                     })
-                    // toAscii
+                    // folded + ascii
                     .map(param => {
                         Object.keys(CHARS).forEach(key => {
                             param = param.replace(new RegExp(`[${CHARS[key].join('')}]`, 'g'), key);
                         });
-
-                        return param.replace(/[^\x20-\x7E]/gu, '');
+                        return param.toLowerCase().replace(/[^\x20-\x7E]/gu, '');
                     })
-                    // delimit
+                    // replaceMatches
                     .map(param => {
-                        return param.replace(/\B([A-Z])/g, '-$1')
-                            .toLowerCase()
-                            .replace(/[-_\s]+/g, REPLACEMENT);
+                        return param.replace(/[-_\s]+/, REPLACEMENT);
                     })
-                    // removeLeft
+                    // trim
                     .map(param => {
-                        return param.replace(new RegExp(`^${REPLACEMENT}+`), '');
-                    })
-                    // removeRight
-                    .map(param => {
-                        return param.replace(new RegExp(`${REPLACEMENT}+$`), '');
+                        return param.replace(new RegExp(`^${REPLACEMENT}+|${REPLACEMENT}+$`), '');
                     })
                     .join('&');
             }

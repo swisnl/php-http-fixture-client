@@ -67,7 +67,7 @@ The `ReponseBuilder` can be instructed to ignore certain query parameters using 
 When configured, the provided parameters will be ignored when transforming requests to file paths.
 You should only provide the parameter name, not the value.
 This allows you to ignore 'dynamic' parameters that change in each test execution.
-Parameters are matched strictly, so 'foo' will match 'foo=bar', but not 'foo[]=bar'.
+Parameters are matched strictly, after url decoding, so 'foo' will match 'foo=bar', but not 'foo[]=bar'.
 
 ### Strict mode
 The `ReponseBuilder` can be set to strict mode using `setStrictMode(true)`.
