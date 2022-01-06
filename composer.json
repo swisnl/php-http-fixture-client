@@ -39,6 +39,9 @@
         "php-http/client-implementation": "1.0",
         "psr/http-client-implementation": "1.0"
     },
+    "suggest": {
+        "ext-json": "Required to mock response headers."
+    },
     "autoload": {
         "psr-4": {
             "Swis\\Http\\Fixture\\": "src/"
