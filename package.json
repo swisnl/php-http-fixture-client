@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "description": "Fixture client for PHP-HTTP",
   "scripts": {
-    "docs:dev": "copyfiles README.md docs && vuepress dev docs",
-    "docs:build": "copyfiles README.md docs && vuepress build docs",
+    "docs:dev": "node docs/.vitepress/copy-readme.js && vitepress dev docs",
+    "docs:build": "node docs/.vitepress/copy-readme.js && vitepress build docs",
+    "docs:serve": "node docs/.vitepress/copy-readme.js && vitepress serve docs",
     "docs:deploy": "gh-pages -d docs/.vuepress/dist"
   },
   "repository": {
@@ -18,8 +19,8 @@
   },
   "homepage": "https://github.com/swisnl/php-http-fixture-client#readme",
   "devDependencies": {
-    "copyfiles": "^2.3.0",
-    "gh-pages": "^3.0.0",
-    "vuepress": "^1.5.0"
+    "cp-file": "^9.1.0",
+    "gh-pages": "^3.2.3",
+    "vitepress": "^0.21.3"
   }
 }

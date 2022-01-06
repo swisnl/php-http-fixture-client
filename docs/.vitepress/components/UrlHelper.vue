@@ -16,7 +16,7 @@
             <option value="patch">PATCH</option>
         </select>
         <h4>Strict mode</h4>
-        <label><input type="checkbox" v-model="strictMode"> Use strict mode</label>
+        <label class="label"><input type="checkbox" v-model="strictMode"> Use strict mode</label>
         <h4>Possible fixtures (in order of specificity)</h4>
         <ol v-if="fixtures.length">
             <li v-for="fixture in fixtures">/path/to/fixtures/{{ fixture }}</li>
@@ -277,7 +277,7 @@
 <style scoped>
     .input,
     .select {
-        border-radius: 2rem;
+        border-radius: 6px;
         border: 1px solid #cfd4db;
         box-sizing: border-box;
         color: #4e6e8e;
@@ -290,6 +290,12 @@
         width: 100%;
     }
 
+    .input,
+    .select,
+    .label {
+        margin: 1rem 0;
+    }
+
     .input {
         cursor: text;
         padding: 0 1rem;
@@ -298,5 +304,9 @@
     .select {
         height: 2rem;
         padding: 0 1rem;
+    }
+
+    .label {
+        display: inline-block;
     }
 </style>
