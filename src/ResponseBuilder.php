@@ -33,11 +33,6 @@ class ResponseBuilder implements ResponseBuilderInterface
     private $fixturesPath;
 
     /**
-     * @var array
-     */
-    private $domainAliases;
-
-    /**
      * @var \Psr\Http\Message\ResponseFactoryInterface
      */
     private $responseFactory;
@@ -48,9 +43,9 @@ class ResponseBuilder implements ResponseBuilderInterface
     private $streamFactory;
 
     /**
-     * @var bool
+     * @var array
      */
-    private $strictMode = false;
+    private $domainAliases = [];
 
     /**
      * @var array
@@ -58,39 +53,41 @@ class ResponseBuilder implements ResponseBuilderInterface
     private $ignoredQueryParameters = [];
 
     /**
+     * @var bool
+     */
+    private $strictMode = false;
+
+    /**
      * @param string                                          $fixturesPath
-     * @param array                                           $domainAliases
      * @param \Psr\Http\Message\ResponseFactoryInterface|null $responseFactory
      * @param \Psr\Http\Message\StreamFactoryInterface|null   $streamFactory
      */
     public function __construct(
         string $fixturesPath,
-        array $domainAliases = [],
         ResponseFactoryInterface $responseFactory = null,
         StreamFactoryInterface $streamFactory = null
     ) {
         $this->fixturesPath = $fixturesPath;
-        $this->domainAliases = $domainAliases;
         $this->responseFactory = $responseFactory ?: Psr17FactoryDiscovery::findResponseFactory();
         $this->streamFactory = $streamFactory ?: Psr17FactoryDiscovery::findStreamFactory();
     }
 
     /**
-     * @return bool
+     * @return array
      */
-    public function useStrictMode(): bool
+    public function getDomainAliases(): array
     {
-        return $this->strictMode;
+        return $this->domainAliases;
     }
 
     /**
-     * @param bool $strictMode
+     * @param array $domainAliases
      *
-     * @return self
+     * @return $this
      */
-    public function setStrictMode(bool $strictMode): self
+    public function setDomainAliases(array $domainAliases): self
     {
-        $this->strictMode = $strictMode;
+        $this->domainAliases = $domainAliases;
 
         return $this;
     }
@@ -106,11 +103,31 @@ class ResponseBuilder implements ResponseBuilderInterface
     /**
      * @param array $ignoredQueryParameters
      *
-     * @return self
+     * @return $this
      */
     public function setIgnoredQueryParameters(array $ignoredQueryParameters): self
     {
         $this->ignoredQueryParameters = $ignoredQueryParameters;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function useStrictMode(): bool
+    {
+        return $this->strictMode;
+    }
+
+    /**
+     * @param bool $strictMode
+     *
+     * @return $this
+     */
+    public function setStrictMode(bool $strictMode): self
+    {
+        $this->strictMode = $strictMode;
 
         return $this;
     }
@@ -261,8 +278,9 @@ class ResponseBuilder implements ResponseBuilderInterface
     {
         $host = trim($request->getUri()->getHost(), '/');
 
-        if (array_key_exists($host, $this->domainAliases)) {
-            return $this->domainAliases[$host];
+        $domainAliases = $this->getDomainAliases();
+        if (array_key_exists($host, $domainAliases)) {
+            return $domainAliases[$host];
         }
 
         return $host;

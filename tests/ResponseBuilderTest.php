@@ -117,12 +117,13 @@ class ResponseBuilderTest extends TestCase
         // arrange
         $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
         $responseFactory = Psr17FactoryDiscovery::findResponseFactory();
+        $builder = $this->getBuilder()->setDomainAliases(['foo.bar' => 'example.com']);
 
         $expectedResponse = $responseFactory->createResponse()
             ->withBody(Utils::streamFor(file_get_contents($this->getFixturesPath().'/example.com/api/articles.mock')));
 
         // act
-        $actualResponse = $this->getBuilder()->build($requestFactory->createRequest('GET', 'https://foo.bar/api/articles'));
+        $actualResponse = $builder->build($requestFactory->createRequest('GET', 'https://foo.bar/api/articles'));
 
         // assert
         $this->assertEquals($expectedResponse->getBody()->__toString(), $actualResponse->getBody()->__toString());
@@ -190,7 +191,7 @@ class ResponseBuilderTest extends TestCase
      */
     protected function getBuilder(): ResponseBuilderInterface
     {
-        return new ResponseBuilder($this->getFixturesPath(), ['foo.bar' => 'example.com']);
+        return new ResponseBuilder($this->getFixturesPath());
     }
 
     /**
