@@ -6,7 +6,7 @@
     "docs:dev": "node docs/.vitepress/copy-readme.js && vitepress dev docs",
     "docs:build": "node docs/.vitepress/copy-readme.js && vitepress build docs",
     "docs:serve": "node docs/.vitepress/copy-readme.js && vitepress serve docs",
-    "docs:deploy": "gh-pages -d docs/.vuepress/dist"
+    "docs:deploy": "gh-pages -d docs/.vitepress/dist"
   },
   "repository": {
     "type": "git",
