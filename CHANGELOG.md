@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## Unreleased
 
+- Nothing
+
+## [3.0.0] - 2022-01-10
+
 ### Changed
 - The `ResponseBuilder` now requires PSR-17 factories instead of a PHP-HTTP factory, to align it with the `Client`. This is only a breaking change in the rare case where you provide your own factory to the `ResponseBuilder`.
 - Removed `domainAliases` from constructor arguments. Please use `setDomainAliases()` on the instance instead.
