@@ -262,7 +262,7 @@
                     })
                     // replaceMatches
                     .map(param => {
-                        return param.replace(/[-_\s]+/, REPLACEMENT);
+                        return param.replace(/[-_\s]+/g, REPLACEMENT);
                     })
                     // trim
                     .map(param => {
