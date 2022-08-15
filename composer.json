@@ -9,7 +9,8 @@
         "fixture",
         "client",
         "psr-7",
-        "psr-18"
+        "psr-18",
+        "testing"
     ],
     "homepage": "https://github.com/swisnl/php-http-fixture-client",
     "license": "MIT",
