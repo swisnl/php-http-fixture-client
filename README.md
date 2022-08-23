@@ -4,7 +4,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/swisnl/php-http-fixture-client.svg)](https://packagist.org/packages/swisnl/php-http-fixture-client)
 [![Software License](https://img.shields.io/packagist/l/swisnl/php-http-fixture-client.svg)](https://github.com/swisnl/php-http-fixture-client/blob/master/LICENSE)
 [![Buy us a tree](https://img.shields.io/badge/Treeware-%F0%9F%8C%B3-lightgreen.svg)](https://plant.treeware.earth/swisnl/php-http-fixture-client)
-[![Build Status](https://travis-ci.org/swisnl/php-http-fixture-client.svg?branch=master)](https://travis-ci.org/swisnl/php-http-fixture-client)
+[![Build Status](https://img.shields.io/github/checks-status/swisnl/php-http-fixture-client/master?label=tests)](https://github.com/swisnl/php-http-fixture-client/actions/workflows/tests.yml)
 [![Scrutinizer Coverage](https://img.shields.io/scrutinizer/coverage/g/swisnl/php-http-fixture-client.svg)](https://scrutinizer-ci.com/g/swisnl/php-http-fixture-client/?branch=master)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/swisnl/php-http-fixture-client.svg)](https://scrutinizer-ci.com/g/swisnl/php-http-fixture-client/?branch=master)
 [![Made by SWIS](https://img.shields.io/badge/%F0%9F%9A%80-made%20by%20SWIS-%230737A9.svg)](https://www.swis.nl)
