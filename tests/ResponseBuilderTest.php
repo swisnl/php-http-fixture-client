@@ -5,7 +5,6 @@ namespace Swis\Http\Fixture\Tests;
 use GuzzleHttp\Psr7\Utils;
 use Http\Discovery\Psr17FactoryDiscovery;
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
 use Swis\Http\Fixture\MockNotFoundException;
 use Swis\Http\Fixture\ResponseBuilder;
 use Swis\Http\Fixture\ResponseBuilderInterface;
@@ -14,6 +13,7 @@ class ResponseBuilderTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider getResponses
      *
      * @param string $url
@@ -103,7 +103,7 @@ class ResponseBuilderTest extends TestCase
         $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
 
         // assert
-        $this->expectException(RuntimeException::class);
+        $this->expectException(\RuntimeException::class);
 
         // act
         $this->getBuilder()->build($requestFactory->createRequest('GET', 'https://example.com/../../out-of-bounds'));
