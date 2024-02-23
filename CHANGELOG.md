@@ -8,6 +8,16 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Nothing
 
+## [3.1.0] - 2024-02-23
+
+### Changed
+- Allow PSR 17 response factory in client
+- Bumped `php-http/mock-client` to `^1.6`
+
+### Fixed
+- Allow installation of `psr/http-message: ^2.0`
+- Allow installation of `symfony/string: ^7.0`
+
 ## [3.0.0] - 2022-01-10
 
 ### Changed
