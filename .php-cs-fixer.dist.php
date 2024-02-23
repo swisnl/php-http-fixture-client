@@ -18,5 +18,6 @@ return (new PhpCsFixer\Config())
         'phpdoc_order' => true,
         'yoda_style' => false,
         'no_superfluous_phpdoc_tags' => false,
+        'fully_qualified_strict_types' => false,
     ])
 ;
