@@ -2,7 +2,6 @@
 
 namespace Swis\Http\Fixture;
 
-use Http\Message\ResponseFactory;
 use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -15,10 +14,10 @@ class Client extends MockClient
     protected $fixtureResponseBuilder;
 
     /**
-     * @param \Swis\Http\Fixture\ResponseBuilderInterface $fixtureResponseBuilder
-     * @param \Http\Message\ResponseFactory|null          $responseFactory
+     * @param \Swis\Http\Fixture\ResponseBuilderInterface                                   $fixtureResponseBuilder
+     * @param \Http\Message\ResponseFactory|\Psr\Http\Message\ResponseFactoryInterface|null $responseFactory
      */
-    public function __construct(ResponseBuilderInterface $fixtureResponseBuilder, ?ResponseFactory $responseFactory = null)
+    public function __construct(ResponseBuilderInterface $fixtureResponseBuilder, $responseFactory = null)
     {
         parent::__construct($responseFactory);
 
