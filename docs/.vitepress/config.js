@@ -7,5 +7,15 @@ export default defineConfig({
     themeConfig: {
         repo: 'swisnl/php-http-fixture-client',
         editLinks: false,
+    },
+    vite: {
+        server: process.env.IS_DDEV_PROJECT ? {
+            strictPort: true,
+            host: true,
+            hmr: {
+                host: process.env.DDEV_HOSTNAME.split(',')[0],
+                protocol: 'wss',
+            }
+        } : {},
     }
 })
