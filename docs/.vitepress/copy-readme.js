@@ -1,3 +1,3 @@
-const cpFile = require('cp-file');
+import {copyFile} from 'copy-file';
 
-cpFile('README.md', 'docs/index.md');
+await copyFile('README.md', 'docs/index.md');

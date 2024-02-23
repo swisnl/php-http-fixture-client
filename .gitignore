@@ -6,5 +6,6 @@ composer.lock
 /.php-cs-fixer.cache
 /.phpunit.result.cache
 /node_modules/
+/docs/.vitepress/cache/
 /docs/.vitepress/dist/
 /docs/index.md
