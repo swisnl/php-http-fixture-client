@@ -15,7 +15,7 @@ class MockNotFoundException extends \Exception
      * @param int             $code
      * @param \Throwable|null $previous
      */
-    public function __construct(string $message = '', array $possiblePaths = [], int $code = 0, \Throwable $previous = null)
+    public function __construct(string $message = '', array $possiblePaths = [], int $code = 0, ?\Throwable $previous = null)
     {
         $this->possiblePaths = $possiblePaths;
 

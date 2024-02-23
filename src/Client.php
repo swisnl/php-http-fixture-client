@@ -18,7 +18,7 @@ class Client extends MockClient
      * @param \Swis\Http\Fixture\ResponseBuilderInterface $fixtureResponseBuilder
      * @param \Http\Message\ResponseFactory|null          $responseFactory
      */
-    public function __construct(ResponseBuilderInterface $fixtureResponseBuilder, ResponseFactory $responseFactory = null)
+    public function __construct(ResponseBuilderInterface $fixtureResponseBuilder, ?ResponseFactory $responseFactory = null)
     {
         parent::__construct($responseFactory);
 
