@@ -6,8 +6,7 @@
   "scripts": {
     "docs:dev": "node docs/.vitepress/copy-readme.js && vitepress dev docs",
     "docs:build": "node docs/.vitepress/copy-readme.js && vitepress build docs",
-    "docs:preview": "node docs/.vitepress/copy-readme.js && vitepress preview docs",
-    "docs:deploy": "gh-pages -d docs/.vitepress/dist"
+    "docs:preview": "node docs/.vitepress/copy-readme.js && vitepress preview docs"
   },
   "repository": {
     "type": "git",
@@ -21,7 +20,6 @@
   "homepage": "https://github.com/swisnl/php-http-fixture-client#readme",
   "devDependencies": {
     "copy-file": "^11.0.0",
-    "gh-pages": "^6.1.1",
     "vitepress": "^1.0.0-rc.44"
   }
 }
