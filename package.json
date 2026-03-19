@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/swisnl/php-http-fixture-client#readme",
   "devDependencies": {
-    "copy-file": "^11.0.0",
-    "vitepress": "^1.0.0-rc.44"
+    "copy-file": "^11.1.0",
+    "vitepress": "^1.6.4"
   }
 }
