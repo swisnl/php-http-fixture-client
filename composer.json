@@ -23,7 +23,7 @@
         }
     ],
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^8.0",
         "php-http/discovery": "^1.14",
         "php-http/mock-client": "^1.6",
         "psr/http-factory": "^1.0",
