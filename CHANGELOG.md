@@ -8,6 +8,14 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Nothing
 
+## [3.2.0] - 2026-03-19
+
+### Fixed
+- Allow installation of `symfony/string: ^8.0`
+
+### Removed
+- Dropped PHP <8.0 support.
+
 ## [3.1.0] - 2024-02-23
 
 ### Changed
