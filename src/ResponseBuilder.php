@@ -65,7 +65,7 @@ class ResponseBuilder implements ResponseBuilderInterface
     public function __construct(
         string $fixturesPath,
         ?ResponseFactoryInterface $responseFactory = null,
-        ?StreamFactoryInterface $streamFactory = null
+        ?StreamFactoryInterface $streamFactory = null,
     ) {
         $this->fixturesPath = $fixturesPath;
         $this->responseFactory = $responseFactory ?: Psr17FactoryDiscovery::findResponseFactory();
